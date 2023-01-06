@@ -1,4 +1,0 @@
-﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
-  GUI.cpp
-C:\Users\user\Desktop\original\PaintProject-master\GUI\GUI.cpp(155): warning C4715: 'GUI::MapInputToActionType': not all control paths return a value
-  PT-Project.vcxproj -> C:\Users\user\Desktop\original\PaintProject-master\Debug\PT Project.exe
