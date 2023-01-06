@@ -135,7 +135,6 @@ ActionType GUI::MapInputToActionType() const
 				return QUARTER;
 			case ITM_HALF:
 				return HALF;
-
 			case ITM_DOUBLE:
 				return DOUBLE1;
 			case ITM_QUADRUPLE:

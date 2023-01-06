@@ -181,7 +181,7 @@
     <ClCompile Include="Figures\CTria.cpp">
       <Filter>Figures Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Resize\PaintProject-master\Actions\Resize.cpp">
+    <ClCompile Include="Actions\Resize.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -307,7 +307,7 @@
     <ClInclude Include="Figures\CTria.h">
       <Filter>Figures Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Resize\PaintProject-master\Actions\Resize.h">
+    <ClInclude Include="Actions\Resize.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
