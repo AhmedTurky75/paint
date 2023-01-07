@@ -123,3 +123,4 @@ void CSquare::Resize(GUI* pGUI, float size)
 
 
 }
+

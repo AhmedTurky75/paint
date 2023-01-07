@@ -90,3 +90,9 @@ void  CRect::Load(ifstream& Infile) {
 	FigGfxInfo.BorderWdth = 3;
 	SetSelected(false);
 }
+
+void CRect::Resize(GUI* pGUI, float size)
+{
+
+
+}

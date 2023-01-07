@@ -23,6 +23,8 @@ private:
 	// Turky
 	Action* ActList[100];
 	
+	// ahmed 
+	bool savedLastChange;
 
 public:	
 	ApplicationManager(); 
@@ -51,6 +53,9 @@ public:
 	//Turky
 	void saveAll(string fileName);
 	void loadAll(ifstream& fin);
+	// ahmed
+	void setLastSaveState(bool);
+	bool getLastSaveState();
 };
 
 #endif

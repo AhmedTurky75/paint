@@ -24,6 +24,9 @@ void ActionChangeColor::Execute()
 		return ChangeBackGroundColor();
 		break;
 	}
+
+	//ahmed
+	pManager->setLastSaveState(false);
 }
 //Execute Change Border Shape Color
 void ActionChangeColor::ChangeBorderShapeColor()

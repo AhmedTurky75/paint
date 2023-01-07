@@ -14,6 +14,7 @@ public:
 	CTria(Point, Point, Point, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;
 	bool isInside(int x, int y);
+	void Resize(GUI* pGUI, float size);
 	//Turky
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& Infile);

@@ -23,4 +23,6 @@ void ActionSave::Execute()
 	string fileName = pGUI->GetSrting()+".txt";
 	pGUI->ClearStatusBar();
 	pManager->saveAll(fileName);
+	//ahmed
+	pManager->setLastSaveState(true);
 }

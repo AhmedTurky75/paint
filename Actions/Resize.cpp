@@ -67,4 +67,7 @@ void Resize::Execute()
 		pGUI->PrintMessage("there isn't a selected figure.. Please Select :)");
 		//Sleep(1000);
 	}
+
+	//ahmed
+	pManager->setLastSaveState(false);
 }

@@ -47,4 +47,6 @@ void ActionAddRect::Execute()
 
 	//Step 4 - Add the Rect to the list of figures
 	pManager->AddFigure(R);
+	//ahmed
+	pManager->setLastSaveState(false);
 }

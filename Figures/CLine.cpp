@@ -71,3 +71,9 @@ void  CLine::Load(ifstream& Infile) {
 	SetSelected(false);
 
 }
+
+void CLine::Resize(GUI* pGUI, float size)
+{
+
+
+}

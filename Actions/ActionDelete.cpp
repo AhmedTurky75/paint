@@ -42,4 +42,6 @@ void ActionDelete::Execute()
         //message to user to ask him to select a shape
         pGUI->PrintMessage("please select a figure first");
     }
+    //ahmed
+    pManager->setLastSaveState(false);
 }

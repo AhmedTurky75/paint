@@ -135,6 +135,7 @@
     <ClCompile Include="Actions\ActionAddTria.cpp" />
     <ClCompile Include="Actions\ActionChangeColor.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
+    <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionOpen.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Actions\ActionAddTria.h" />
     <ClInclude Include="Actions\ActionChangeColor.h" />
     <ClInclude Include="Actions\ActionDelete.h" />
+    <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionOpen.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />

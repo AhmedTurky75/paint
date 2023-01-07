@@ -98,3 +98,9 @@ void  CElips::Load(ifstream& Infile) {
 	FigGfxInfo.BorderWdth = 3;
 	SetSelected(false);
 }
+
+void CElips::Resize(GUI* pGUI, float size)
+{
+
+
+}

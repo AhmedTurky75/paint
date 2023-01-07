@@ -43,4 +43,6 @@ void ActionAddLine::Execute()
 
 	//Step 4 - Add the Triangle to the list of figures
 	pManager->AddFigure(R);
+	//ahmed
+	pManager->setLastSaveState(false);
 }

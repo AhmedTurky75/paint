@@ -10,6 +10,9 @@
 #include "Actions\ActionSave.h"
 #include "Actions\ActionOpen.h"
 #include "Actions\Resize.h"
+#include "Actions/ActionExit.h"
+
+#include "iostream"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -19,7 +22,8 @@ ApplicationManager::ApplicationManager()
 	selectedfigure = NULL;
 	
 	FigCount = 0;
-		
+	//ahmed	
+	savedLastChange = true;
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
@@ -41,7 +45,6 @@ void ApplicationManager::Run()
 
 		//4- Update the interface
 		UpdateInterface();	
-
 	}while(ActType != EXIT);
 	
 }
@@ -123,6 +126,15 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 				switch (msgboxID)
 				{
 				case IDYES://case of confirmation
+
+					// ahmed  add cleanup
+					for (int i = 0; i < FigCount; i++)
+					{
+							delete FigList[i];
+							FigList[i] = NULL;
+							
+					}
+							this->FigCount =0;
 					newAct = new ActionOpen(this);
 					break;
 				case IDCANCEL://case of cnacel or deny the deletion
@@ -142,7 +154,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case EXIT:
 			///create ExitAction here
-			
+
+			newAct = new ActionExit(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
@@ -228,7 +241,8 @@ void ApplicationManager::changeFigFillColor(Point p)
 
 	for (int i = 0; i < FigCount; i++)
 	{
-		if (FigList[i]->IsSelected()) {
+		// ahmed  FigList[i]->figtype != LINE
+		if (FigList[i]->IsSelected() ) {
 			FigList[i]->ChngFillClr(pGUI->pWind->GetColor(p.x, p.y));
 			FigList[i]->SetSelected(false);
 		}
@@ -260,6 +274,16 @@ void ApplicationManager::Resize_figure(GUI* pGUI, float size) const {
 
 int ApplicationManager::GetFigureCount() {
 	return FigCount;
+}
+
+//ahmed
+void ApplicationManager::setLastSaveState(bool state) {
+	savedLastChange = state;
+}
+
+bool ApplicationManager::getLastSaveState() {
+	return savedLastChange;
+
 }
 
 //==================================================================================//

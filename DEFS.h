@@ -27,6 +27,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	SAVE,			//Save the whole graph to a file
 	LOAD,			//Load a graph from a file
 	EXIT,			//Exit the application
+
 	//Afnan Resize v02
 	BACK1,
 	HALF,

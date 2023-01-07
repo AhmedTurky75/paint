@@ -91,4 +91,6 @@ void ActionOpen::Execute()
 		} while (flag == 1);
 		*/
 
+		//ahmed
+	pManager->setLastSaveState(true);
 }
