@@ -13,15 +13,15 @@ GUI::GUI()
 
 	
 	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 60;
+	UI.ToolBarHeight = 55;
+	UI.MenuItemWidth = 65;
 	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
 	UI.MsgColor = RED;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	UI.HighlightColor = GRAY;	//This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = TURQUOISE;
+	UI.BkGrndColor = GHOSTWHITE;	//Background color
+	UI.HighlightColor = CYAN;	//This color should NOT be used to draw figures. use if for highlight only
+	UI.StatusBarColor = LIGHTGRAY;
 	UI.PenWidth = 3;	//width of the figures frames
 	UI.isFilled = 0;
 	
@@ -91,20 +91,23 @@ ActionType GUI::MapInputToActionType() const
 			case ITM_RECT: return DRAW_RECT;
 			case ITM_TRIA: return DRAW_TRIA;
 			case ITM_ELPS: return DRAW_ELPS;
+			case ITM_HEX: return DRAW_HEX;
 				//Todo:: Sohaile ->
 			case BORDER_SHAPE: return CHNG_DRAW_CLR;
 			case FILLED_SHAPE: return CHNG_FILL_CLR;
 			case BACK_GROUND: return CHNG_BK_CLR;
-
+				// ZIENAB
+			case ITM_SEND_BACK: return SEND_BACK;
+			case ITM_BRINGTOFRONT: return BRNG_FRNT;
 				// Turky
-			case ITM_HEX: return DRAW_HEX;
 			case ITM_DELETE: return DEL;
 			case ITM_SELECT: return DRAW_SLCT;
 			case ITM_RESIZE: return RESIZE;
 			case ITM_EXIT: return EXIT;	
 			case ITM_SAVE: return SAVE;
 			case ITM_OPEN: return LOAD;
-			
+				//--- Sohaila 
+			case ITM_TO_PLAY: return SWITCH_PLAY;
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
@@ -145,13 +148,33 @@ ActionType GUI::MapInputToActionType() const
 	}
 	else	//GUI is in PLAY mode
 	{
-		///TODO:
-		//perform checks similar to Draw mode checks above
-		//and return the correspoding action
-		return TO_PLAY;	//just for now. This should be updated
-	}	
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 
+			switch (ClickedItemOrder)
+			{
+
+			case ITM_SELECT_TYPE: return TO_PICK_TYPE;
+			case ITM_SELECT_FILL: return TO_PICK_FILL;
+				//ahmed
+			case ITM_SELECT_Type_FILL: return TO_PICK_TYPE_FILL;
+
+			case ITM_SWICH_DRAW: return TO_DRAW;
+			case ITM_EXIT2: return EXIT;
+
+			default: return EMPTY;	//A click on empty place in desgin toolbar
+			}
+		}
+
+	}
 }
+
 //======================================================================================//
 //								Output Functions										//
 //======================================================================================//
@@ -205,14 +228,13 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ALL_COLORS] = "images\\MenuItems\\Colors.JPG";
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\Menu_Delete.JPG";
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Menu_Resize.JPG";
-	MenuItemImages[ITM_SENDTOBACK] = "images\\MenuItems\\Menu_SendToBack.JPG";
+	MenuItemImages[ITM_SEND_BACK] = "images\\MenuItems\\Menu_SendToBack.JPG";
 	MenuItemImages[ITM_BRINGTOFRONT] = "images\\MenuItems\\Menu_BringToFront.JPG";
-	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_Undo.JPG";
-	MenuItemImages[ITM_REDO] = "images\\MenuItems\\Menu_Redo.JPG";
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Menu_Resize.JPG";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.JPG";
 	MenuItemImages[ITM_OPEN] = "images\\MenuItems\\Menu_Open.JPG";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.JPG";
+	MenuItemImages[ITM_TO_PLAY] = "images\\MenuItems\\mood_play.JPG";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
 
@@ -225,17 +247,43 @@ void GUI::CreateDrawToolBar() const
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(DARKGRAY, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
+// --- Sohaila --- 
+// Functions for play mode 
 void GUI::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
-	///TODO: write code to create Play mode menu
+
+	string PlayItemImages[PLAY_ITM_COUNT];
+	PlayItemImages[ITM_SELECT_TYPE] = "images\\MenuItems\\figure_icon_type.jpg";
+	PlayItemImages[ITM_SELECT_FILL] = "images\\MenuItems\\figure_icon_fill.jpg";
+	//ahmed
+	PlayItemImages[ITM_SELECT_Type_FILL] = "images\\MenuItems\\figure_icon_type_fill.jpg";
+
+	PlayItemImages[ITM_SWICH_DRAW] = "images\\MenuItems\\mood_draw.jpg";
+	PlayItemImages[ITM_EXIT2] = "images\\MenuItems\\Menu_Exit.jpg";
+
+	/*if (buttonIndex == -1) {
+		ClearToolBar();*/
+
+		//Draw menu item one image at a time
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(PlayItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+	/*else {
+		pWind->DrawImage(PlayItemImages[buttonIndex], buttonIndex * UI.MenuItemWidth,
+			0, UI.MenuItemWidth, UI.ToolBarHeight);
+	}*/
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::ClearDrawArea() const
@@ -246,7 +294,15 @@ void GUI::ClearDrawArea() const
 	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
+//--- Sohaila ---
+//For play mode 
+void GUI::ClearToolBar() const
+{
+	//Clear tool bar by drawing a filled Square
+	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+}
 void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
@@ -453,6 +509,33 @@ void GUI::DrawElips(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) cons
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+
+//======================================================================================//
+//								HEXAGON Drawing Functions								//
+//======================================================================================//
+void GUI::DrawHexagon(Point P1, int length, int height, GfxInfo HexaGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = HexaGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, HexaGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (HexaGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(HexaGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+	int x[] = { P1.x, P1.x + length, P1.x + 1.5 * length, P1.x + length, P1.x, P1.x - 0.5 * length };
+	int y[] = { P1.y, P1.y, P1.y + 0.5 * height, P1.y + height, P1.y + height, P1.y + 0.5 * height };
+	pWind->DrawPolygon(x, y, 6, style);
+}
 
 //======================================================================================//
 //								Resize Shape								//

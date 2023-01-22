@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actions\ActionAddElips.cpp" />
+    <ClCompile Include="Actions\ActionAddHexagon.cpp" />
     <ClCompile Include="Actions\ActionAddLine.cpp" />
     <ClCompile Include="Actions\ActionAddRect.cpp" />
     <ClCompile Include="Actions\ActionAddTria.cpp" />
@@ -137,9 +138,16 @@
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionOpen.cpp" />
+    <ClCompile Include="Actions\ActionPickFillFigure.cpp" />
+    <ClCompile Include="Actions\ActionPickTypeAndFillFigure.cpp" />
+    <ClCompile Include="Actions\ActionPickTypeFigure.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
+    <ClCompile Include="Actions\ActionSwitchToDraw.cpp" />
+    <ClCompile Include="Actions\ActionSwitchToPlay.cpp" />
+    <ClCompile Include="Actions\BringToFront.cpp" />
     <ClCompile Include="Actions\Resize.cpp" />
+    <ClCompile Include="Actions\SendBack.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\image.cpp" />
@@ -177,6 +185,7 @@
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
     <ClCompile Include="Figures\CElips.cpp" />
     <ClCompile Include="Figures\CFigure.cpp" />
+    <ClCompile Include="Figures\CHexagon.cpp" />
     <ClCompile Include="Figures\CLine.cpp" />
     <ClCompile Include="Figures\CRect.cpp" />
     <ClCompile Include="Figures\CSquare.cpp" />
@@ -188,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\ActionAddElips.h" />
+    <ClInclude Include="Actions\ActionAddHexagon.h" />
     <ClInclude Include="Actions\ActionAddLine.h" />
     <ClInclude Include="Actions\ActionAddRect.h" />
     <ClInclude Include="Actions\ActionAddTria.h" />
@@ -195,9 +205,16 @@
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionOpen.h" />
+    <ClInclude Include="Actions\ActionPickFillFigure.h" />
+    <ClInclude Include="Actions\ActionPickTypeAndFillFigure.h" />
+    <ClInclude Include="Actions\ActionPickTypeFigure.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
+    <ClInclude Include="Actions\ActionSwitchToDraw.h" />
+    <ClInclude Include="Actions\ActionSwitchToPlay.h" />
+    <ClInclude Include="Actions\BringToFront.h" />
     <ClInclude Include="Actions\Resize.h" />
+    <ClInclude Include="Actions\SendBack.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />
@@ -220,6 +237,7 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
     <ClInclude Include="Figures\CElips.h" />
     <ClInclude Include="Figures\CFigure.h" />
+    <ClInclude Include="Figures\CHexagon.h" />
     <ClInclude Include="Figures\CLine.h" />
     <ClInclude Include="Figures\CRect.h" />
     <ClInclude Include="Figures\CSquare.h" />

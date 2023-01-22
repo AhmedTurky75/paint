@@ -14,6 +14,9 @@ protected:
 	//Turky
 	int figureType;
 	/// Add more parameters if needed.
+		// --- Sohaila --- 
+	//For Play mood
+	bool figHidden;
 
 public:
 	CFigure();
@@ -23,7 +26,8 @@ public:
 
 	virtual void DrawMe(GUI*) const  = 0 ;		//Draw the figure
 	virtual bool isInside(int, int) = 0;        //Select Shape
-	
+	virtual void SetID(int id) = 0;
+
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 
@@ -39,8 +43,17 @@ public:
 	virtual void Resize(GUI* pGUI, float size) = 0;	//Resize the figure Afnan
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
+	virtual string PrintInfo(GUI* pOut)const = 0;	//print all figure info on the status bar
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+
+		//--- Sohaila --- 
+   // For Play Mood
+	void Hide();
+	void Show();
+	// sohaila 
+	bool HiddenStatus() const;			//Shows Current Figure status in playmode.
+	GfxInfo CFigure::GetGfxInfo();
 };
 
 #endif

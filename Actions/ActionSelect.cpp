@@ -23,9 +23,17 @@ void ActionSelect::Execute()
 	if (r)
 	{
 		r->SetSelected(!r->IsSelected());
-		/*if (r->IsSelected())
+
+		if (r->IsSelected())
 		{
-			->printInfo(pGUI, pManger->GetFigureIndex(r));
-		}*/
+			//pGUI->PrintMessage("selected");
+			pGUI->PrintMessage(r->PrintInfo(pGUI));
+		}
+		else {
+			//pGUI->PrintMessage("UnSelect");
+			pGUI->PrintMessage(r->PrintInfo(pGUI));
+
+		}
+		
 	}
 }

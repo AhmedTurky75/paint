@@ -30,7 +30,7 @@ public:
 	void CreateStatusBar() const;	//create the status bar
 	void CreateSizeBar() const; // create Size bar Afnan
 	void CreateToolBar() const; //create tool bar for size Afnan
-
+	void ClearToolBar() const;
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area
 	
@@ -40,7 +40,7 @@ public:
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a Rect
 	void DrawTria(Point P1, Point P2, Point P3, GfxInfo RectGfxInfo, bool selected) const;  //Draw a Tria
 	void DrawElips(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const;  //Draw a Ellipse
-
+	void DrawHexagon(Point P1, int length, int height, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a Hexagon
 
 
 	///TODO: Make similar functions for drawing all other figures.

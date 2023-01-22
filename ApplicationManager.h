@@ -48,6 +48,16 @@ public:
 	GUI *GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void Resize_figure(GUI* pGUI, float size) const; //Afnan Resize v02
+
+	//---Sohaila --- 
+	//For Play mode
+	int ApplicationManager::getFigCount() const;
+	CFigure* ApplicationManager::DrawnFigs(int i) const;
+
+	//ZIENAB
+	void Send_Back(CFigure* swapped);
+	void Bring_Front(CFigure* swapped);
+
 	//Turky
 	void clearInterface();
 	//Turky

@@ -19,6 +19,9 @@
     <Filter Include="Application Manager">
       <UniqueIdentifier>{be3a4e10-d854-4bf8-9add-2f85904b4103}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Action Classes\PlayModeActions">
+      <UniqueIdentifier>{c7810360-f851-4b32-b786-6a58d6aa0e9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -187,6 +190,33 @@
     <ClCompile Include="Actions\ActionExit.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\BringToFront.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SendBack.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionSwitchToDraw.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionSwitchToPlay.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionPickFillFigure.cpp">
+      <Filter>Action Classes\PlayModeActions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionPickTypeAndFillFigure.cpp">
+      <Filter>Action Classes\PlayModeActions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionPickTypeFigure.cpp">
+      <Filter>Action Classes\PlayModeActions</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionAddHexagon.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CHexagon.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -315,6 +345,33 @@
     </ClInclude>
     <ClInclude Include="Actions\ActionExit.h">
       <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\BringToFront.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SendBack.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionSwitchToDraw.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionSwitchToPlay.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionPickFillFigure.h">
+      <Filter>Action Classes\PlayModeActions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionPickTypeAndFillFigure.h">
+      <Filter>Action Classes\PlayModeActions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionPickTypeFigure.h">
+      <Filter>Action Classes\PlayModeActions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionAddHexagon.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CHexagon.h">
+      <Filter>Figures Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -40,6 +40,32 @@ bool CTria::isInside(int x, int y)
 	return (A == A1 + A2 + A3);
 }
 
+// Zienab
+void CTria::SetID(int id)
+{
+	ID = id;
+}
+
+string CTria::PrintInfo(GUI* pGUI)const
+{
+	double _area = 0.5 * abs(firstPoint.x * (secondPoint.y - thirdPoint.y) + secondPoint.x * (thirdPoint.y - firstPoint.y) + thirdPoint.x * (firstPoint.y - secondPoint.y));
+
+	string ind = to_string(ID);
+	string x1 = to_string(firstPoint.x);
+	string y1 = to_string(firstPoint.y);
+	string x2 = to_string(secondPoint.x);
+	string y2 = to_string(secondPoint.y);
+	string x3 = to_string(thirdPoint.x);
+	string y3 = to_string(thirdPoint.y);
+	string Area = to_string(_area);
+
+
+	return ("Triangle :-  ID:" + ind + " ,FirstPoint: (" + x1 + ", " + y1 + ")" + " ,SecondPoint: (" + x2 + ", " + y2 + ")" + " ,ThirdPoint: (" + x3 + ", " + y3 + ")" + " ,Area:" + Area);
+
+
+}
+
+
 void CTria::Save(ofstream& OutFile) {
 	OutFile << figureType;
 	OutFile << ' ';
@@ -114,5 +140,50 @@ void  CTria::Load(ifstream& Infile) {
 void CTria::Resize(GUI* pGUI, float size)
 {
 
+	if (size == 0.5) size = -1;
+	else if (size == 0.25) size = -(4.0 / 3);
+
+	Point P;
+	P.x = (firstPoint.x + secondPoint.x + thirdPoint.x) / 3;
+	P.y = (firstPoint.y + secondPoint.y + thirdPoint.y) / 3;
+	if (firstPoint.x <= P.x)
+		firstPoint.x -= (P.x - firstPoint.x) * size / 2;
+	else
+		firstPoint.x += (firstPoint.x - P.x) * size / 2;
+
+	if (secondPoint.x <= P.x)
+		secondPoint.x -= (P.x - secondPoint.x) * size / 2;
+	else
+		secondPoint.x += (secondPoint.x - P.x) * size / 2;
+
+	if (thirdPoint.x <= P.x)
+		thirdPoint.x -= (P.x - thirdPoint.x) * size / 2;
+	else
+		thirdPoint.x += (thirdPoint.x - P.x) * size / 2;
+
+	if (firstPoint.y <= P.y)
+		firstPoint.y -= (P.y - firstPoint.y) * size / 2;
+	else
+		firstPoint.y += (firstPoint.y - P.y) * size / 2;
+
+	if (secondPoint.y <= P.y)
+		secondPoint.y -= (P.y - secondPoint.y) * size / 2;
+	else
+		secondPoint.y += (secondPoint.y - P.y) * size / 2;
+
+	if (thirdPoint.y <= P.y)
+		thirdPoint.y -= (P.y - thirdPoint.y) * size / 2;
+	else
+		thirdPoint.y += (thirdPoint.y - P.y) * size / 2;
+
+	if (firstPoint.y <= UI.ToolBarHeight
+		|| firstPoint.y > (UI.height - UI.StatusBarHeight)
+		|| firstPoint.x > UI.width || firstPoint.x<0 ||
+		secondPoint.y <= UI.ToolBarHeight || secondPoint.y>(UI.height - UI.StatusBarHeight) ||
+		secondPoint.x > UI.width || secondPoint.x<0 ||
+		secondPoint.y <= UI.ToolBarHeight ||
+		thirdPoint.y>(UI.height - UI.StatusBarHeight) || thirdPoint.x > UI.width || thirdPoint.x < 0) {
+		pGUI->PrintMessage("Triangle size will be more than Drawing Area");
+	}
 
 }

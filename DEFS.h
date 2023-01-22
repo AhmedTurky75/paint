@@ -38,8 +38,14 @@ enum ActionType //The actions supported (you can add more if needed)
 	STATUS,			//A click on the status bar
 	EMPTY,			//A click on empty place in the toolbar
 
+	//--- Sohaila ---
 	TO_DRAW,		//Switch interface to Draw mode
-	TO_PLAY			//Switch interface to Play mode
+	SWITCH_PLAY,	//Switch interface to Play mode
+
+	// for play mode
+	TO_PICK_TYPE,		//to selecte figure by type
+	TO_PICK_FILL,		//to selecte figure by fill
+	TO_PICK_TYPE_FILL,  //to selecte figure by fill and type
 
 	///TODO: Add more action types (if needed)
 };
@@ -48,7 +54,8 @@ enum figureTypes // The typ of each figure to be used in save operation
 	SQR,
 	RECTANGLE,
 	TRIANGLE,
-	ELLIPSE
+	ELLIPSE,
+	HEXAGON
 };
 struct Point	//To be used for figures points
 { int x,y; };

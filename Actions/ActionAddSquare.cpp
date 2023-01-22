@@ -5,7 +5,7 @@
 
 #include "..\GUI\GUI.h"
 
-ActionAddSquare::ActionAddSquare(ApplicationManager * pApp):Action(pApp)
+ActionAddSquare::ActionAddSquare(ApplicationManager* pApp) :Action(pApp)
 {}
 
 //Execute the action
@@ -36,9 +36,35 @@ void ActionAddSquare::Execute()
 	//Read 1st point and store in point P1
 	pGUI->GetPointClicked(P1.x, P1.y);
 
+	if (P1.y < UI.StatusBarHeight || P1.y > UI.height - UI.StatusBarHeight)
+	{
+		bool flag = 0;
+		pGUI->PrintMessage("Please, Choose a valid place.You can only draw in your drawing area");
+		while (!flag)
+		{
+			pGUI->GetPointClicked(P1.x, P1.y);
+			if (!(P1.y < UI.StatusBarHeight || P1.y > UI.height - UI.StatusBarHeight))
+				flag = 1;
+		}
+
+	}
+
 	pGUI->PrintMessage("New Square: Click at second point");
 	//Read 2nd point and store in point P2
 	pGUI->GetPointClicked(P2.x, P2.y);
+
+	if (P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.StatusBarHeight)
+	{
+		bool flag = 0;
+		pGUI->PrintMessage("Please, Choose a valid place.You can only draw in your drawing area");
+		while (!flag)
+		{
+			pGUI->GetPointClicked(P2.x, P2.y);
+			if (!(P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.StatusBarHeight))
+				flag = 1;
+		}
+
+	}
 
 	pGUI->ClearStatusBar();
 
@@ -62,6 +88,9 @@ void ActionAddSquare::Execute()
 		CSquare* R = new CSquare(topLeft, SideLength, SqrGfxInfo);
 		//Step 4 - Add the Square to the list of figures
 		pManager->AddFigure(R);
+
+		pGUI->PrintMessage(R->PrintInfo(pGUI));
+
 	}
 	//ahmed
 	pManager->setLastSaveState(false);

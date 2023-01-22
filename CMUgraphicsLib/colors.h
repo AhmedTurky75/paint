@@ -33,6 +33,7 @@ bool operator!=(color a, color b);
   Predefine some color objects...  Data was liberally borrowed from the
   Open Group's X11 rbg.txt file
 
+
   $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp 
 
 */
@@ -182,5 +183,11 @@ const color DARKMAGENTA = color(139, 0, 139);
 const color DARKRED = color(139, 0, 0);
 const color LIGHTGREEN = color(144, 238, 144);
 
+// sohaila --- pallete colors 
+const color _LIGHTSKYBLUE = color(41, 195, 169);
+const color _DarkYELLOW = color(238, 225, 95);
+const color _RED = color(238, 0, 0);
+const color _PURPLE = color(176, 17, 145);
+const color _LIGHTGREEN = color(162, 204, 44);
 
 #endif //COLOR_H

@@ -29,6 +29,28 @@ bool CSquare::isInside(int x, int y)
 	return false;
 }
 
+// Zienab
+void CSquare::SetID(int id)
+{
+	ID = id;
+}
+
+string CSquare::PrintInfo(GUI* pGUI)const
+{
+	double _area = length * length;
+	string ind = to_string(ID);
+	string _length = to_string(length);
+	string x1 = to_string(TopLeftCorner.x);
+	string y1 = to_string(TopLeftCorner.y);
+	string x2 = to_string((TopLeftCorner.x) + length);
+	string y2 = to_string((TopLeftCorner.y) + length);
+	string Area = to_string(_area);
+
+	return ("Square :-  ID:" + ind + " ,FirstPoint: (" + x1 + ", " + y1 + ")" + " ,SecondPoint: (" + x2 + ", " + y2 + ")" + " ,length:" + _length + " ,Area: " + Area);
+
+}
+
+
 void CSquare::Save(ofstream& OutFile) {
 	OutFile << figureType;
 	OutFile << ' ';
@@ -107,12 +129,12 @@ void CSquare::Resize(GUI* pGUI, float size)
 		|| test2.x > UI.width || test1.x < 1)
 	{
 		pGUI->PrintMessage("Square size will be more than Drawing Area");
-		Sleep(1000);
+
 	}
 	else if (length_test < 20)
 	{
 		pGUI->PrintMessage("Square size will be very small");
-		Sleep(1000);
+
 	}
 	else
 	{

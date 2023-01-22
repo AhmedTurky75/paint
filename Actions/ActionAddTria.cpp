@@ -15,17 +15,17 @@ void ActionAddTria::Execute()
 	GUI* pGUI = pManager->GetGUI();
 
 
-	GfxInfo SqrGfxInfo;
+	GfxInfo TriGfxInfo;
 	//get drawing, filling colors and pen width from the interface
-	SqrGfxInfo.DrawClr = pGUI->getCrntDrawColor();
+	TriGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	if (UI.isFilled == 1) {
-		SqrGfxInfo.isFilled = true;
+		TriGfxInfo.isFilled = true;
 	}
 	else {
-		SqrGfxInfo.isFilled = false;
+		TriGfxInfo.isFilled = false;
 	}
-	SqrGfxInfo.FillClr = pGUI->getCrntFillColor();
-	SqrGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
+	TriGfxInfo.FillClr = pGUI->getCrntFillColor();
+	TriGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
 
 	//Step 1 - Read Triangle data from the user
@@ -34,22 +34,65 @@ void ActionAddTria::Execute()
 	//Read 1st point and store in point P1
 	pGUI->GetPointClicked(P1.x, P1.y);
 
+	if (P1.y < UI.StatusBarHeight || P1.y > UI.height - UI.StatusBarHeight)
+	{
+		bool flag = 0;
+		pGUI->PrintMessage("Please, Choose a valid place.You can only draw in your drawing area");
+		while (!flag)
+		{
+			pGUI->GetPointClicked(P1.x, P1.y);
+			if (!(P1.y < UI.StatusBarHeight || P1.y > UI.height - UI.StatusBarHeight))
+				flag = 1;
+		}
+
+	}
+
 	pGUI->PrintMessage("New Triangle: Click at the second point");
 	//Read 2nd point and store in point P2
 	pGUI->GetPointClicked(P2.x, P2.y);
+
+	if (P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.StatusBarHeight)
+	{
+		bool flag = 0;
+		pGUI->PrintMessage("Please, Choose a valid place.You can only draw in your drawing area");
+		while (!flag)
+		{
+			pGUI->GetPointClicked(P2.x, P2.y);
+			if (!(P2.y < UI.StatusBarHeight || P2.y > UI.height - UI.StatusBarHeight))
+				flag = 1;
+		}
+
+	}
 
 	pGUI->PrintMessage("New Triangle: Click at the third point");
 	//Read 3nd point and store in point P3
 	pGUI->GetPointClicked(p3.x, p3.y);
 
+	if (p3.y < UI.StatusBarHeight || p3.y > UI.height - UI.StatusBarHeight)
+	{
+		bool flag = 0;
+		pGUI->PrintMessage("Please, Choose a valid place.You can only draw in your drawing area");
+		while (!flag)
+		{
+			pGUI->GetPointClicked(p3.x, p3.y);
+			if (!(p3.y < UI.StatusBarHeight || p3.y > UI.height - UI.StatusBarHeight))
+				flag = 1;
+		}
+
+	}
+
 	pGUI->ClearStatusBar();
 
 
 	//Step 3 - Create a Triangle with the parameters read from the user
-	CTria* R = new CTria(P1, P2,p3, SqrGfxInfo);
+	CTria* R = new CTria(P1, P2, p3, TriGfxInfo);
 
 	//Step 4 - Add the Triangle to the list of figures
 	pManager->AddFigure(R);
+
+	//Zienab
+	pGUI->PrintMessage(R->PrintInfo(pGUI));
+
 	//ahmed
 	pManager->setLastSaveState(false);
 }

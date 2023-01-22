@@ -40,13 +40,12 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_SELECT,
 	ITM_DELETE,
 	ITM_RESIZE,
-	ITM_SENDTOBACK,
+	ITM_SEND_BACK,
 	ITM_BRINGTOFRONT,
-	ITM_UNDO,
-	ITM_REDO,
 	ITM_SAVE,
 	ITM_OPEN,
-
+	//--- Sohaila ---
+	ITM_TO_PLAY,
 	//TODO: Add more items names here
 	ALL_COLORS,
 	ITM_EXIT,		//Exit item
@@ -57,13 +56,14 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 
 enum PlayMenuItem //The items of the Play menu (you should add more items)
 {
-	//Note: Items are ordered here as they appear in menu
-	//If you want to change the menu items order, change the order here
-	
-	//TODO: Add more items names here
+	// icon to swtich between draw mode and play mode
+	ITM_SELECT_TYPE,		// to selecte figure by type
+	ITM_SELECT_FILL,		// to selecte figure by fill
+	ITM_SELECT_Type_FILL,	// to selecte figure by fill and type
+	ITM_SWICH_DRAW,			// switch item in menu
+	ITM_EXIT2,				//Exit item
 
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
-	
 };
 
 

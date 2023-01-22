@@ -31,6 +31,25 @@ bool CLine::isInside(int x, int y)
 	return false;
 }
 
+
+// Zienab
+void CLine::SetID(int id)
+{
+	ID = id;
+}
+
+string CLine::PrintInfo(GUI* pGUI)const
+{
+	string ind = to_string(ID);
+	string x1 = to_string(firstPoint.x);
+	string y1 = to_string(firstPoint.y);
+	string x2 = to_string(secondPoint.x);
+	string y2 = to_string(secondPoint.y);
+
+	return ("LINE :-  ID: " + ind + " , FirstPoint: (" + x1 + ", " + y1 + ")" + " , SecondPoint: (" + x2 + ", " + y2 + ")");
+
+}
+
 void CLine::Save(ofstream& OutFile) {
 	OutFile << figureType;
 	OutFile << ' ';

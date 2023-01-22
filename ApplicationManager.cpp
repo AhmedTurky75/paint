@@ -1,17 +1,24 @@
 #include "ApplicationManager.h"
-#include "Actions\ActionAddLine.h"
-#include "Actions\ActionAddSquare.h"
+#include "Actions/ActionAddLine.h"
+#include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddRect.h"
 #include "Actions/ActionAddTria.h"
 #include "Actions/ActionAddElips.h"
-#include "Actions\ActionSelect.h"
-#include "Actions\ActionDelete.h"
-#include "Actions\ActionChangeColor.h"
-#include "Actions\ActionSave.h"
-#include "Actions\ActionOpen.h"
-#include "Actions\Resize.h"
+#include "Actions/ActionAddHexagon.h"
+#include "Actions/ActionSelect.h"
+#include "Actions/ActionDelete.h"
+#include "Actions/ActionChangeColor.h"
+#include "Actions/ActionSave.h"
+#include "Actions/ActionOpen.h"
+#include "Actions/Resize.h"
 #include "Actions/ActionExit.h"
-
+#include "Actions/SendBack.h"
+#include "Actions/BringToFront.h"
+#include "Actions/ActionSwitchToPlay.h"
+#include "Actions/ActionSwitchToDraw.h"
+#include "Actions/ActionPickTypeFigure.h"
+#include "Actions/ActionPickFillFigure.h"
+#include "Actions/ActionPickTypeAndFillFigure.h"
 #include "iostream"
 
 //Constructor
@@ -77,7 +84,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case DRAW_ELPS:
 			newAct = new ActionAddElips(this);
 			break;
-
+		case DRAW_HEX:
+			newAct = new ActionAddHexagon(this);
+			break;
 		case CHNG_DRAW_CLR:
 			//Todo:: Sohaile ->
 			currenColorFun = BORDER_SHAPE_FUN;
@@ -103,9 +112,13 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionDelete(this);
 			break;
 
-		case UNDO:
+			//ZIENAB
+		case SEND_BACK:
+			newAct = new SENDTOBACK(this);
 			break;
-		case REDO:
+			//ZIENAB
+		case BRNG_FRNT:
+			newAct = new BRINGTOFRONT(this);
 			break;
 			//Turky
 		case SAVE:
@@ -151,6 +164,27 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			///Afnan Resize v02
 		case RESIZE:
 			newAct = new Resize(this);
+			break;
+
+
+			//---Sohaila---
+		case SWITCH_PLAY:
+			newAct = new ActionSwitchToPlay(this);
+			break;
+			// ----- FOR PLAY MODE -----
+		case TO_DRAW:
+			newAct = new ActionSwitchToDraw(this);
+			break;
+
+		case TO_PICK_TYPE:
+			newAct = new ActionPickTypeFigure(this);
+			break;
+		case TO_PICK_FILL:
+			newAct = new ActionPickFillFigure(this);
+			break;
+		case TO_PICK_TYPE_FILL:
+			newAct = new ActionPickTypeAndFillFigure(this);
+			break;
 
 		case EXIT:
 			///create ExitAction here
@@ -183,8 +217,13 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if(FigCount < MaxFigCount )
-		FigList[FigCount++] = pFig;	
+	if (FigCount < MaxFigCount)
+	{
+		FigList[FigCount] = pFig;
+		//ZIENAB
+		FigList[FigCount]->SetID(FigCount + 1);
+		FigCount++;
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
@@ -193,10 +232,13 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//if this point (x,y) does not belong to any figure return NULL
 	///Add your code here to search for a figure given a point x,y	
 	for (int i = FigCount - 1; i >= 0; i--)
-	{
-		if (FigList[i]->isInside(x, y))
-			return FigList[i];
-
+	{	//sohaila 
+		if (FigList[i]->HiddenStatus() == false) {
+			if (FigList[i]->isInside(x, y)) {
+				FigList[i]->PrintInfo(pGUI);
+				return FigList[i];
+			}
+		}
 	}
 	return NULL;
 
@@ -285,6 +327,65 @@ bool ApplicationManager::getLastSaveState() {
 	return savedLastChange;
 
 }
+//For /play Mode
+//Transfer FigCount to playmode to avoid unnessecary loops  
+int ApplicationManager::getFigCount() const
+{
+	return FigCount;
+}
+//Transfer figures in FigList to playmode
+CFigure* ApplicationManager::DrawnFigs(int i) const
+{
+	return FigList[i];
+}
+
+
+//==================================================================================//
+//							     SEND TO BACK				                        //
+//==================================================================================//
+
+//Zienab
+
+void ApplicationManager::Send_Back(CFigure* swapped)
+{
+	CFigure* temp = swapped;
+	int Swapped_index;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (swapped == FigList[i])
+		{
+			Swapped_index = i;
+			//break;
+		}
+	}
+	for (int i = Swapped_index; i > 0; i--)
+		FigList[i] = FigList[i - 1];
+	FigList[0] = temp;
+
+}
+//==================================================================================//
+//							     BRING TO FRONT				                        //
+//==================================================================================//
+
+
+void ApplicationManager::Bring_Front(CFigure* swapped)
+{
+	CFigure* temp = swapped;
+	int Swapped_index;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (swapped == FigList[i])
+		{
+			Swapped_index = i;
+
+		}
+	}
+
+	for (int i = Swapped_index; i < FigCount - 1; i++)
+		FigList[i] = FigList[i + 1];
+	FigList[FigCount - 1] = temp;
+
+}
 
 //==================================================================================//
 //							Interface Management Functions							//
@@ -294,8 +395,12 @@ bool ApplicationManager::getLastSaveState() {
 void ApplicationManager::UpdateInterface() const
 {
 	pGUI->ClearDrawArea();
-	for(int i=0; i<FigCount; i++)
-		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->HiddenStatus() == false)
+		{
+			FigList[i]->DrawMe(pGUI);
+		}
+	}		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 

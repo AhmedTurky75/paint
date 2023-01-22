@@ -8,6 +8,7 @@
 #include "..\Figures\CRect.h"
 #include "..\Figures\CTria.h"
 #include "..\Figures\CElips.h"
+#include "..\Figures\CHexagon.h"
 #include <iostream>
 //Turky
 ActionOpen::ActionOpen(ApplicationManager* pApp) :Action(pApp)
@@ -34,7 +35,7 @@ void ActionOpen::Execute()
 	if (fin.fail())
 	{
 		pGUI->PrintMessage("No file with such a name : "+ fileName);
-	}
+	}else{ 
 	pManager->loadAll(fin);
 	int FigCount;
 	fin >> FigCount;
@@ -71,7 +72,13 @@ void ActionOpen::Execute()
 			fig->Load(fin);
 			pManager->AddFigure(fig);
 			break;
+		case HEXAGON:
+			fig = new CHexagon();
+			fig->Load(fin);
+			pManager->AddFigure(fig);
+			break;
 		}
+	}
 	}
 	/*	do {
 			fin >> figureType;

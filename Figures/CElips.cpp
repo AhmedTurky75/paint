@@ -36,6 +36,26 @@ bool CElips::isInside(int x, int y)
 
 }
 
+
+// Zienab
+void CElips::SetID(int id)
+{
+	ID = id;
+}
+
+string CElips::PrintInfo(GUI* pGUI)const
+{
+	string ind = to_string(ID);
+	string x1 = to_string(firstPoint.x);
+	string y1 = to_string(firstPoint.y);
+	string x2 = to_string(secondPoint.x);
+	string y2 = to_string(secondPoint.y);
+
+	return ("Elipse :-  ID: " + ind + " , FirstPoint: (" + x1 + ", " + y1 + ")" + " , SecondPoint: (" + x2 + ", " + y2 + ")");
+
+}
+
+
 void CElips::Save(ofstream& OutFile) {
 	OutFile << figureType;
 	OutFile << ' ';
@@ -101,6 +121,41 @@ void  CElips::Load(ifstream& Infile) {
 
 void CElips::Resize(GUI* pGUI, float size)
 {
+	
+
+	Point test1 = firstPoint, test2 = secondPoint;
+	if (size == .5) size = -0.5;
+	else if (size == .25) size = -(4.0 / 3);
+	else if (size == 2) size = 1;
+	else size = 4;
 
 
+	// half radius (horizontal x && vertical y)
+	float deltaX, deltaY;
+	deltaX = 0.5 * (secondPoint.x - firstPoint.x);
+	deltaY = 0.5 * (secondPoint.y - firstPoint.y);
+
+
+
+	test1.x -= deltaX * size;
+	test2.x += deltaX * size;
+	test1.y -= deltaY * size;
+	test2.y += deltaY * size;
+
+	if (test1.y < UI.ToolBarHeight || test2.y > UI.height - UI.StatusBarHeight
+		|| test2.x > UI.width || test1.x < 1)
+	{
+		pGUI->PrintMessage("Ellips size will be more than Drawing Area");
+	}
+	else if (((test2.x - test1.x) / 2) < 15 || ((test2.y - test1.y) / 2) < 10)
+	{
+		pGUI->PrintMessage("Ellips size will be very small");
+	}
+	else
+	{
+		firstPoint = test1;
+		secondPoint = test2;
+
+	}
+	
 }
